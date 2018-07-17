@@ -1,2 +1,2 @@
-# CodeBuddy
-An iOS application that encourages individuals to find locals and engage in learning programming and cutting-edge technology, via collaborative learning.
+# Code Buddy
+A social learning iOS application that allows users to find locals and engage in learning how to program, collaborate on projects, and discover new technologies.
