@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import FirebaseAuth
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController { //, UITextFieldDelegate
 
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -16,6 +17,9 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
+        
+        
         
         emailTextField.backgroundColor = UIColor.clear
         emailTextField.attributedPlaceholder = NSAttributedString(string: emailTextField.placeholder!, attributes: [NSAttributedStringKey.foregroundColor: UIColor(red: (253/255), green: (178/255), blue: (43/255), alpha: 1)])
@@ -33,5 +37,53 @@ class LoginViewController: UIViewController {
         
         loginButton.layer.cornerRadius = 10
         loginButton.clipsToBounds = true
+        
+        handleTextField()
+    }
+    
+//    func dismissKeyboard() {
+//        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+//        view.endEditing(true)
+//    }
+//
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        emailTextField.resignFirstResponder()
+//        passwordTextField.resignFirstResponder()
+//        return true
+//    }
+    func handleTextField() {
+        emailTextField.addTarget(self, action: #selector(SignUpViewController.textFieldDidChange), for: UIControlEvents.editingChanged)
+        passwordTextField.addTarget(self, action: #selector(SignUpViewController.textFieldDidChange), for: UIControlEvents.editingChanged)
+    }
+    @objc func textFieldDidChange() {
+        guard let email = emailTextField.text, !email.isEmpty,
+            let password = passwordTextField.text, !password.isEmpty else {
+                loginButton.setTitleColor(UIColor.lightText, for: UIControlState.normal)
+                loginButton.isEnabled = false
+                return
+        }
+        loginButton.setTitleColor(UIColor.white, for: UIControlState.normal)
+        loginButton.isEnabled = true
+    }
+    @IBAction func loginButton_TouchUpInside(_ sender: Any) {
+        Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!, completion: { ( user, error) in
+            if error != nil {
+                print(error!.localizedDescription)
+                return
+            }
+            self.performSegue(withIdentifier: "loginToTabbar", sender: nil)
+        })
+    }
+}
+
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
 }

@@ -18,6 +18,7 @@
 		842FA41020A2EB60006201C6 /* iconbeast-lite-300 in Resources */ = {isa = PBXBuildFile; fileRef = 842FA40E20A2EB5F006201C6 /* iconbeast-lite-300 */; };
 		842FA41120A2EB60006201C6 /* iconbeast-lite-200 in Resources */ = {isa = PBXBuildFile; fileRef = 842FA40F20A2EB60006201C6 /* iconbeast-lite-200 */; };
 		8435000020D2548400B04782 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8435FFFF20D2548400B04782 /* SignUpViewController.swift */; };
+		84AD97A1210C7D3C00FC35F6 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AD97A0210C7D3C00FC35F6 /* SplashView.swift */; };
 		84F7115B20DB5F4700391A4F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7115A20DB5F4700391A4F /* HomeViewController.swift */; };
 		84F7115D20DB5F6500391A4F /* NetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7115C20DB5F6500391A4F /* NetworkViewController.swift */; };
 		84F7115F20DB5F7000391A4F /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7115E20DB5F7000391A4F /* PostViewController.swift */; };
@@ -66,6 +67,7 @@
 		842FA40E20A2EB5F006201C6 /* iconbeast-lite-300 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "iconbeast-lite-300"; sourceTree = "<group>"; };
 		842FA40F20A2EB60006201C6 /* iconbeast-lite-200 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "iconbeast-lite-200"; sourceTree = "<group>"; };
 		8435FFFF20D2548400B04782 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		84AD97A0210C7D3C00FC35F6 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		84F7115A20DB5F4700391A4F /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		84F7115C20DB5F6500391A4F /* NetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkViewController.swift; sourceTree = "<group>"; };
 		84F7115E20DB5F7000391A4F /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 				84F7115E20DB5F7000391A4F /* PostViewController.swift */,
 				84F7116020DB5F9800391A4F /* WorldViewController.swift */,
 				84F7116220DB5FA500391A4F /* MeViewController.swift */,
+				84AD97A0210C7D3C00FC35F6 /* SplashView.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -442,6 +445,7 @@
 				8435000020D2548400B04782 /* SignUpViewController.swift in Sources */,
 				84F7116120DB5F9800391A4F /* WorldViewController.swift in Sources */,
 				84F7115D20DB5F6500391A4F /* NetworkViewController.swift in Sources */,
+				84AD97A1210C7D3C00FC35F6 /* SplashView.swift in Sources */,
 				84F7115B20DB5F4700391A4F /* HomeViewController.swift in Sources */,
 				84F7116520DC619400391A4F /* SplashViewController.swift in Sources */,
 			);

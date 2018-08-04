@@ -25,6 +25,8 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.hideKeyboardWhenTappedAround()
+        
         usernameTextField.backgroundColor = UIColor.clear
         usernameTextField.attributedPlaceholder = NSAttributedString(string: usernameTextField.placeholder!, attributes: [NSAttributedStringKey.foregroundColor: UIColor(red: (253/255), green: (178/255), blue: (43/255), alpha: 1)])
         let bottomLayerUsername = CALayer()
@@ -67,6 +69,25 @@ class SignUpViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(SignUpViewController.handleSelectMeImageView))
         meImage.addGestureRecognizer(tapGesture)
         meImage.isUserInteractionEnabled = true
+        
+        handleTextField()
+    }
+    
+    func handleTextField() {
+        usernameTextField.addTarget(self, action: #selector(SignUpViewController.textFieldDidChange), for: UIControlEvents.editingChanged)
+        emailTextField.addTarget(self, action: #selector(SignUpViewController.textFieldDidChange), for: UIControlEvents.editingChanged)
+        passwordTextField.addTarget(self, action: #selector(SignUpViewController.textFieldDidChange), for: UIControlEvents.editingChanged)
+    }
+    
+    @objc func textFieldDidChange() {
+        guard let username = usernameTextField.text, !username.isEmpty, let email = emailTextField.text, !email.isEmpty,
+        let password = passwordTextField.text, !password.isEmpty else {
+            signupButton.setTitleColor(UIColor.lightText, for: UIControlState.normal)
+            signupButton.isEnabled = false
+            return
+        }
+        signupButton.setTitleColor(UIColor.white, for: UIControlState.normal)
+        signupButton.isEnabled = true
     }
     
     @objc func handleSelectMeImageView() {
@@ -86,27 +107,33 @@ class SignUpViewController: UIViewController {
                 return
             }
             let uid = user?.uid
-            let storageRef = Storage.storage().reference(forURL: "gs://codebuddy-308e5.appspot.com").child("prof_Image").child((user?.uid)!)
-            if let profImage = self.pickedImage, let dataImage = UIImageJPEGRepresentation(profImage, 0.1) {
+            let storageRef = Storage.storage().reference(forURL: "gs://codebuddy-308e5.appspot.com").child("profile_Image").child((user?.uid)!)
+            if let profileImage = self.pickedImage, let dataImage = UIImageJPEGRepresentation(profileImage, 0.1) {
                 storageRef.putData(dataImage, metadata: nil, completion: { (metadata, error) in
                     if error != nil {
                         return
                     }
-                    let profImageURL = metadata?.downloadURL()?.absoluteString
-                    let ref = Database.database().reference()
-                    let usersRef = ref.child("users")
-                    let newUserRef = usersRef.child(uid!)
-                    newUserRef.setValue(["username": self.usernameTextField.text!, "email": self.emailTextField.text!, "profileImageURL": profImageURL])
-                    print("description: \(newUserRef.description())")
+                let profileImageURL = metadata?.downloadURL()?.absoluteString
+                    
+                self.setUserInfo(profileImageUrl: profileImageURL!, username: self.usernameTextField.text!, email: self.emailTextField.text!, uid: uid!)
+                //unwrapped '!'
+                    
                 })
             }
             // ...
         })
     }
+    func setUserInfo(profileImageUrl: String, username: String, email: String, uid: String) {
+        let ref = Database.database().reference()
+        let usersRef = ref.child("users")
+        let newUserRef = usersRef.child(uid)
+        newUserRef.setValue(["username": username, "email": email, "profileImageURL": profileImageUrl])
+//        print("description: \(newUserRef.description())")
+    }
 }
 extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        print("Finshed")
+        print("Finished")
         if let image = info["UIImagePickerControllerOriginalImage"] as? UIImage {
             pickedImage = image
             meImage.image = image
