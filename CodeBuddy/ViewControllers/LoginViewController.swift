@@ -39,8 +39,15 @@ class LoginViewController: UIViewController { //, UITextFieldDelegate
         loginButton.clipsToBounds = true
         
         handleTextField()
+        
     }
     
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        if Auth.auth().currentUser != nil {
+//             self.performSegue(withIdentifier: "loginToTabbar", sender: nil)
+//        }
+    }
 //    func dismissKeyboard() {
 //        //Causes the view (or one of its embedded text fields) to resign the first responder status.
 //        view.endEditing(true)

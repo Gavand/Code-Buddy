@@ -18,6 +18,8 @@
 
 #import "FBSDKAppEventsUtility.h"
 
+#import <objc/runtime.h>
+
 #import <AdSupport/AdSupport.h>
 
 #import "FBSDKAccessToken.h"
@@ -28,7 +30,6 @@
 #import "FBSDKError.h"
 #import "FBSDKInternalUtility.h"
 #import "FBSDKLogger.h"
-#import "FBSDKMacros.h"
 #import "FBSDKSettings.h"
 #import "FBSDKTimeSpentData.h"
 
@@ -44,8 +45,10 @@
   NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
   parameters[@"event"] = eventCategory;
 
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
   NSString *attributionID = [[self class] attributionID];  // Only present on iOS 6 and below.
   [FBSDKInternalUtility dictionary:parameters setObject:attributionID forKey:@"attribution"];
+#endif
 
   if (!implicitEventsOnly && shouldAccessAdvertisingID) {
     NSString *advertiserID = [[self class] advertiserID];
@@ -65,6 +68,10 @@
   NSString *userID = [FBSDKAppEvents userID];
   if (userID) {
     parameters[@"app_user_id"] = userID;
+  }
+  NSString *userData = [FBSDKAppEvents getUserData];
+  if (userData){
+    parameters[@"ud"] = userData;
   }
 
   [FBSDKAppEventsDeviceInfo extendDictionaryWithDeviceInfo:parameters];
@@ -208,7 +215,7 @@
   }
 
   [FBSDKLogger singleShotLogEntry:behaviorToLog logEntry:msg];
-  NSError *error = [FBSDKError errorWithCode:FBSDKAppEventsFlushErrorCode message:msg];
+  NSError *error = [NSError fbErrorWithCode:FBSDKErrorAppEventsFlush message:msg];
   [[NSNotificationCenter defaultCenter] postNotificationName:FBSDKAppEventsLoggingResultNotification object:error];
 }
 
@@ -334,10 +341,79 @@ restOfStringCharacterSet:(NSCharacterSet *)restOfStringCharacterSet
   return (long)round([[NSDate date] timeIntervalSince1970]);
 }
 
-- (instancetype)init
-{
-  FBSDK_NO_DESIGNATED_INITIALIZER();
++ (id)getVariable:(NSString *)variableName fromInstance:(NSObject *)instance {
+  Ivar ivar = class_getInstanceVariable([instance class], [variableName UTF8String]);
+  if (ivar != NULL) {
+    const char *encoding = ivar_getTypeEncoding(ivar);
+    if (encoding != NULL && encoding[0] == '@') {
+      return object_getIvar(instance, ivar);
+    }
+  }
+
   return nil;
+}
+
++ (NSNumber *)getNumberValue:(NSString *)text {
+  NSNumber *value = @0;
+
+  NSLocale *locale = [NSLocale currentLocale];
+
+  NSString *ds = [locale objectForKey:NSLocaleDecimalSeparator] ?: @".";
+  NSString *gs = [locale objectForKey:NSLocaleGroupingSeparator] ?: @",";
+  NSString *separators = [ds stringByAppendingString:gs];
+
+  NSString *regex = [NSString stringWithFormat:@"[+-]?([0-9]+[%1$@]?)?[%1$@]?([0-9]+[%1$@]?)+", separators];
+  NSRegularExpression *re = [NSRegularExpression regularExpressionWithPattern:regex
+                                                                      options:0
+                                                                        error:nil];
+  NSTextCheckingResult *match = [re firstMatchInString:text
+                                               options:0
+                                                 range:NSMakeRange(0, text.length)];
+  if (match) {
+    NSString *validText = [text substringWithRange:match.range];
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    formatter.locale = locale;
+    formatter.numberStyle = NSNumberFormatterDecimalStyle;
+
+    value = [formatter numberFromString:validText];
+    if (nil == value) {
+      value = @([validText floatValue]);
+    }
+  }
+
+  return value;
+}
+
++ (BOOL)isDebugBuild {
+#if TARGET_IPHONE_SIMULATOR
+  return YES;
+#else
+  BOOL isDevelopment = NO;
+
+  // There is no provisioning profile in AppStore Apps.
+  @try
+  {
+    NSData *data = [NSData dataWithContentsOfFile:[NSBundle.mainBundle pathForResource:@"embedded" ofType:@"mobileprovision"]];
+    if (data) {
+      const char *bytes = [data bytes];
+      NSMutableString *profile = [[NSMutableString alloc] initWithCapacity:data.length];
+      for (NSUInteger i = 0; i < data.length; i++) {
+        [profile appendFormat:@"%c", bytes[i]];
+      }
+      // Look for debug value, if detected we're in a development build.
+      NSString *cleared = [[profile componentsSeparatedByCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet] componentsJoinedByString:@""];
+      isDevelopment = ([cleared rangeOfString:@"<key>get-task-allow</key><true/>"].length > 0);
+    }
+
+    return isDevelopment;
+  }
+  @catch(NSException *exception)
+  {
+
+  }
+
+  return NO;
+#endif
 }
 
 @end

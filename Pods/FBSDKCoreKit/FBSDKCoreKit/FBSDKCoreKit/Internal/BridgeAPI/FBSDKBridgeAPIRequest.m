@@ -24,7 +24,6 @@
 #import "FBSDKBridgeAPIProtocolWebV1.h"
 #import "FBSDKBridgeAPIProtocolWebV2.h"
 #import "FBSDKInternalUtility.h"
-#import "FBSDKMacros.h"
 #import "FBSDKSettings.h"
 #import "FBSDKUtility.h"
 
@@ -60,7 +59,7 @@ NSString *const FBSDKBridgeAPIVersionKey = @"version";
     _protocolMap = @{
                      @(FBSDKBridgeAPIProtocolTypeNative): @{
                          FBSDK_CANOPENURL_FACEBOOK:[[FBSDKBridgeAPIProtocolNativeV1 alloc] initWithAppScheme:@"fbapi20130214"],
-                         FBSDK_CANOPENURL_MESSENGER:[[FBSDKBridgeAPIProtocolNativeV1 alloc] initWithAppScheme:@"fb-messenger-api20140430"],
+                         FBSDK_CANOPENURL_MESSENGER:[[FBSDKBridgeAPIProtocolNativeV1 alloc] initWithAppScheme:@"fb-messenger-share-api"],
                          FBSDK_CANOPENURL_MSQRD_PLAYER:[[FBSDKBridgeAPIProtocolNativeV1 alloc] initWithAppScheme:@"msqrdplayer-api20170208"]
                          },
                      @(FBSDKBridgeAPIProtocolTypeWeb): @{
@@ -97,18 +96,6 @@ NSString *const FBSDKBridgeAPIVersionKey = @"version";
     _actionID = [[NSUUID UUID] UUIDString];
   }
   return self;
-}
-
-- (instancetype)init
-{
-  FBSDK_NOT_DESIGNATED_INITIALIZER(initWithProtocol:protocolType:scheme:methodName:methodVersion:parameters:userInfo:);
-  return [self initWithProtocol:nil
-                   protocolType:FBSDKBridgeAPIProtocolTypeWeb
-                         scheme:nil
-                     methodName:nil
-                  methodVersion:nil
-                     parameters:nil
-                       userInfo:nil];
 }
 
 #pragma mark - Public Methods
