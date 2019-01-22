@@ -12,9 +12,19 @@ class PostViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+//        
+//        let mainStoryboard = UIStoryboard(name: "Post", bundle: nil)
+//        _ = mainStoryboard.instantiateViewController(withIdentifier: "userVC") as! PostViewController
+        
+//        presentViewController(userVC, animated: true, completion: nil)
+        
+
+        
 
 //        view.backgroundColor = UIColor.yellow
     }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

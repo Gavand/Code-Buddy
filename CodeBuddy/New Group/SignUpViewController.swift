@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FBSDKLoginKit
 import FacebookLogin
 import FacebookCore
 import FirebaseAuth
@@ -146,4 +147,3 @@ extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationCon
         dismiss(animated: true, completion: nil)
     }
 }
-

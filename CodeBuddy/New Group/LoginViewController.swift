@@ -90,16 +90,17 @@ class LoginViewController: UIViewController { //, UITextFieldDelegate
             hud.textLabel.text = "Success"
             hud.indicatorView = JGProgressHUDSuccessIndicatorView()
             hud.show(in: self.view)
-//            hud.dismiss(afterDelay: 3.0)
+            hud.dismiss(afterDelay: 3.0)
             self.performSegue(withIdentifier: "loginToTabbar", sender: nil)
             
-        }, onError: { error in
+        }, onError: { errorString in
 //            ProgressHUD.showError(error!)
 //            let hud = JGProgressHUD(style: .dark)
-            hud.textLabel.text = error!
+//            print(error!)
+            hud.textLabel.text = errorString
             hud.indicatorView = JGProgressHUDErrorIndicatorView()
             hud.show(in: self.view)
-//            hud.dismiss(afterDelay: 3.0)
+            hud.dismiss(afterDelay: 3.0)
             
         })
     }

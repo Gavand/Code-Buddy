@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		1A10A9BC23AB642BECE50EE8 /* Pods_CodeBuddyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 775CBD78119A940884AA340C /* Pods_CodeBuddyUITests.framework */; };
+		84000FF121F5E45F005265B4 /* App.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84000FF021F5E45F005265B4 /* App.storyboard */; };
+		84000FF521F5E73E005265B4 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84000FF421F5E73E005265B4 /* Home.storyboard */; };
+		84000FF721F5E75A005265B4 /* Network.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84000FF621F5E75A005265B4 /* Network.storyboard */; };
+		84000FF921F5E76C005265B4 /* Post.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84000FF821F5E76C005265B4 /* Post.storyboard */; };
+		84000FFB21F5E77C005265B4 /* World.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84000FFA21F5E77C005265B4 /* World.storyboard */; };
+		84000FFD21F5E78E005265B4 /* Me.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84000FFC21F5E78E005265B4 /* Me.storyboard */; };
 		84021A292192CDF000E5C0F9 /* JGProgressHUD-master in Resources */ = {isa = PBXBuildFile; fileRef = 84021A282192CDF000E5C0F9 /* JGProgressHUD-master */; };
 		84021A332192CF3700E5C0F9 /* JGProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84021A302192CF2000E5C0F9 /* JGProgressHUD.framework */; };
 		84021A342192CF3700E5C0F9 /* JGProgressHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 84021A302192CF2000E5C0F9 /* JGProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -95,6 +101,12 @@
 		6A9783962336BC1AB2497854 /* Pods-CodeBuddyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CodeBuddyTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CodeBuddyTests/Pods-CodeBuddyTests.release.xcconfig"; sourceTree = "<group>"; };
 		775CBD78119A940884AA340C /* Pods_CodeBuddyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CodeBuddyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D056495509A0623CA61BE97 /* Pods-CodeBuddy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CodeBuddy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CodeBuddy/Pods-CodeBuddy.debug.xcconfig"; sourceTree = "<group>"; };
+		84000FF021F5E45F005265B4 /* App.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = App.storyboard; sourceTree = "<group>"; };
+		84000FF421F5E73E005265B4 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
+		84000FF621F5E75A005265B4 /* Network.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Network.storyboard; sourceTree = "<group>"; };
+		84000FF821F5E76C005265B4 /* Post.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Post.storyboard; sourceTree = "<group>"; };
+		84000FFA21F5E77C005265B4 /* World.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = World.storyboard; sourceTree = "<group>"; };
+		84000FFC21F5E78E005265B4 /* Me.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Me.storyboard; sourceTree = "<group>"; };
 		84021A282192CDF000E5C0F9 /* JGProgressHUD-master */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "JGProgressHUD-master"; sourceTree = "<group>"; };
 		84021A2A2192CF2000E5C0F9 /* JGProgressHUD.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JGProgressHUD.xcodeproj; path = "JGProgressHUD-master/JGProgressHUD.xcodeproj"; sourceTree = "<group>"; };
 		8410CDD820D208610069F632 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -177,6 +189,37 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		84000FE121F5CD3C005265B4 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8410CDD820D208610069F632 /* LoginViewController.swift */,
+				8435FFFF20D2548400B04782 /* SignUpViewController.swift */,
+				84F7115A20DB5F4700391A4F /* HomeViewController.swift */,
+				84F7115C20DB5F6500391A4F /* NetworkViewController.swift */,
+				84F7115E20DB5F7000391A4F /* PostViewController.swift */,
+				84F7116020DB5F9800391A4F /* WorldViewController.swift */,
+				84F7116220DB5FA500391A4F /* MeViewController.swift */,
+				84F7116420DC619400391A4F /* SplashViewController.swift */,
+				84AD97A0210C7D3C00FC35F6 /* SplashView.swift */,
+			);
+			name = ViewControllers;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		84000FFE21F5E85A005265B4 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				84198CA12076CC1F003D6A28 /* Start.storyboard */,
+				84000FF021F5E45F005265B4 /* App.storyboard */,
+				84000FF421F5E73E005265B4 /* Home.storyboard */,
+				84000FF621F5E75A005265B4 /* Network.storyboard */,
+				84000FF821F5E76C005265B4 /* Post.storyboard */,
+				84000FFA21F5E77C005265B4 /* World.storyboard */,
+				84000FFC21F5E78E005265B4 /* Me.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
 		84021A2B2192CF2000E5C0F9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -215,16 +258,8 @@
 				84FECC54218ADB4F005F37E2 /* AuthService.swift */,
 				84FECC56218AE8EA005F37E2 /* Config.swift */,
 				8498369D214A180900FC69BB /* Extensions.swift */,
-				84F7116420DC619400391A4F /* SplashViewController.swift */,
-				84AD97A0210C7D3C00FC35F6 /* SplashView.swift */,
-				8435FFFF20D2548400B04782 /* SignUpViewController.swift */,
-				8410CDD820D208610069F632 /* LoginViewController.swift */,
-				84F7115A20DB5F4700391A4F /* HomeViewController.swift */,
-				84F7115C20DB5F6500391A4F /* NetworkViewController.swift */,
-				84F7115E20DB5F7000391A4F /* PostViewController.swift */,
-				84F7116020DB5F9800391A4F /* WorldViewController.swift */,
-				84F7116220DB5FA500391A4F /* MeViewController.swift */,
-				84198CA12076CC1F003D6A28 /* Start.storyboard */,
+				84000FFE21F5E85A005265B4 /* Storyboards */,
+				84000FE121F5CD3C005265B4 /* ViewControllers */,
 				84198CA42076CC1F003D6A28 /* Assets.xcassets */,
 				8421A00D20DC9C1D0082A273 /* GoogleService-Info.plist */,
 				84198CA92076CC1F003D6A28 /* Info.plist */,
@@ -406,13 +441,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84000FF721F5E75A005265B4 /* Network.storyboard in Resources */,
 				842FA41020A2EB60006201C6 /* iconbeast-lite-300 in Resources */,
+				84000FF521F5E73E005265B4 /* Home.storyboard in Resources */,
 				8418807321917A6300AD9435 /* ProgressHUD-master in Resources */,
+				84000FF921F5E76C005265B4 /* Post.storyboard in Resources */,
 				842FA41120A2EB60006201C6 /* iconbeast-lite-200 in Resources */,
+				84000FF121F5E45F005265B4 /* App.storyboard in Resources */,
 				8418807221917A6300AD9435 /* ProgressHUD.bundle in Resources */,
 				84021A292192CDF000E5C0F9 /* JGProgressHUD-master in Resources */,
 				8421A00E20DC9C1D0082A273 /* GoogleService-Info.plist in Resources */,
 				84198CA52076CC1F003D6A28 /* Assets.xcassets in Resources */,
+				84000FFB21F5E77C005265B4 /* World.storyboard in Resources */,
+				84000FFD21F5E78E005265B4 /* Me.storyboard in Resources */,
 				84198CA32076CC1F003D6A28 /* Start.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -486,6 +527,7 @@
 				"${BUILT_PRODUCTS_DIR}/FacebookShare/FacebookShare.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -500,6 +542,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookShare.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JGProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
