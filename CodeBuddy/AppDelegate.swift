@@ -15,6 +15,7 @@ import FacebookCore
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
+    let transitionCoordinator = TransitionCoordinator()
     
     var window: UIWindow?
     

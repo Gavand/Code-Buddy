@@ -64,8 +64,8 @@ class LoginViewController: UIViewController { //, UITextFieldDelegate
     //        return true
     //    }
     func handleTextField() {
-        emailTextField.addTarget(self, action: #selector(SignUpViewController.textFieldDidChange), for: UIControlEvents.editingChanged)
-        passwordTextField.addTarget(self, action: #selector(SignUpViewController.textFieldDidChange), for: UIControlEvents.editingChanged)
+        emailTextField.addTarget(self, action: #selector(self.textFieldDidChange), for: UIControlEvents.editingChanged)
+        passwordTextField.addTarget(self, action: #selector(self.textFieldDidChange), for: UIControlEvents.editingChanged)
     }
     @objc func textFieldDidChange() {
         guard let email = emailTextField.text, !email.isEmpty,
@@ -114,6 +114,6 @@ extension UIViewController {
     }
     
     @objc func dismissKeyboard() {
-        view.endEditing(true)
+        view.endEditing(true) 
     }
 }

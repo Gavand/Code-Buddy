@@ -55,8 +55,8 @@ class SignUpViewController: UIViewController {
         
         //        let loginButton = LoginButton(readPermissions: [ .publicProfile ])
         let loginButton = LoginButton(readPermissions: [ .publicProfile, .email, .userFriends ])
-        //        loginButton.center = view.center
-        loginButton.frame = CGRect(x: 16, y: 500, width: view.frame.width - 32, height: 44)
+//        loginButton.center = view.center
+        loginButton.frame = CGRect(x: 16, y: 625, width: view.frame.width - 32, height: 44)
         loginButton.layer.cornerRadius = 10
         loginButton.clipsToBounds = true
         
@@ -68,7 +68,7 @@ class SignUpViewController: UIViewController {
         meImage.layer.cornerRadius = 60.5
         meImage.clipsToBounds = true
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(SignUpViewController.handleSelectMeImageView))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleSelectMeImageView))
         meImage.addGestureRecognizer(tapGesture)
         meImage.isUserInteractionEnabled = true
         signupButton.isEnabled = false
@@ -81,9 +81,9 @@ class SignUpViewController: UIViewController {
     }
     
     func handleTextField() {
-        usernameTextField.addTarget(self, action: #selector(SignUpViewController.textFieldDidChange), for: UIControlEvents.editingChanged)
-        emailTextField.addTarget(self, action: #selector(SignUpViewController.textFieldDidChange), for: UIControlEvents.editingChanged)
-        passwordTextField.addTarget(self, action: #selector(SignUpViewController.textFieldDidChange), for: UIControlEvents.editingChanged)
+        usernameTextField.addTarget(self, action: #selector(self.textFieldDidChange), for: UIControlEvents.editingChanged)
+        emailTextField.addTarget(self, action: #selector(self.textFieldDidChange), for: UIControlEvents.editingChanged)
+        passwordTextField.addTarget(self, action: #selector(self.textFieldDidChange), for: UIControlEvents.editingChanged)
     }
     
     @objc func textFieldDidChange() {
