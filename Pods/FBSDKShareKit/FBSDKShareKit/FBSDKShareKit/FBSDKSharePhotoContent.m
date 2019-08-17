@@ -77,12 +77,6 @@
 
 #pragma mark - FBSDKSharingContent
 
-- (void)addToParameters:(NSMutableDictionary<NSString *, id> *)parameters
-          bridgeOptions:(FBSDKShareBridgeOptions)bridgeOptions
-{
-  [parameters addEntriesFromDictionary:[self addParameters:parameters bridgeOptions:bridgeOptions]];
-}
-
 - (NSDictionary<NSString *, id> *)addParameters:(NSDictionary<NSString *, id> *)existingParameters
                                   bridgeOptions:(FBSDKShareBridgeOptions)bridgeOptions
 {
@@ -109,9 +103,9 @@
     } else if (photo.imageURL) {
       if (photo.imageURL.isFileURL) {
         // load the contents of the file and bridge the image
-        UIImage *image = [UIImage imageWithContentsOfFile:photo.imageURL.absoluteString];
+        UIImage *image = [UIImage imageWithContentsOfFile:photo.imageURL.path];
         if (image) {
-          [images addObject:photo.image];
+          [images addObject:image];
         }
       }
     } else if (photo.image) {
@@ -120,9 +114,9 @@
     }
   }
   if (images.count > 0) {
-    [FBSDKInternalUtility dictionary:updatedParameters
-                           setObject:images
-                              forKey:@"photos"];
+    [FBSDKBasicUtility dictionary:updatedParameters
+                        setObject:images
+                           forKey:@"photos"];
   }
 
   return updatedParameters;

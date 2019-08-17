@@ -166,9 +166,9 @@
 
 - (void)logTapEventWithEventName:(NSString *)eventName parameters:(NSDictionary *)parameters
 {
-    [FBSDKAppEvents logImplicitEvent:eventName
-                          valueToSum:nil
+    [FBSDKAppEvents logInternalEvent:eventName
                           parameters:parameters
+                  isImplicitlyLogged:YES
                          accessToken:[FBSDKAccessToken currentAccessToken]];
 }
 
@@ -215,12 +215,6 @@
             selectedColor:(UIColor *)selectedColor
  selectedHighlightedColor:(UIColor *)selectedHighlightedColor
 {
-  if (!selectedColor) {
-    selectedColor = [self defaultSelectedColor];
-  }
-  if (!selectedHighlightedColor) {
-    selectedHighlightedColor = highlightedColor;
-  }
   [self _configureWithIcon:icon
                      title:title
            backgroundColor:backgroundColor
@@ -338,6 +332,12 @@
   }
   if (!highlightedColor) {
     highlightedColor = [self defaultHighlightedColor];
+  }
+  if (!selectedColor) {
+    selectedColor = [self defaultSelectedColor];
+  }
+  if (!selectedHighlightedColor) {
+    selectedHighlightedColor = highlightedColor;
   }
 
   self.adjustsImageWhenDisabled = NO;

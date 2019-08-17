@@ -20,7 +20,7 @@ class SplashBehavior: UIDynamicBehavior {
     
     lazy var splashBehavior: UIDynamicItemBehavior = {
         let createdSplashBehavior = UIDynamicItemBehavior()
-        createdSplashBehavior.elasticity = 0.75
+        createdSplashBehavior.elasticity = 0.75simul
         return createdSplashBehavior
     }()
     

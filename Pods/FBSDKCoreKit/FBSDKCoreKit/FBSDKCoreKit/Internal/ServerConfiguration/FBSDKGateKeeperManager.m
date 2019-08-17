@@ -34,6 +34,9 @@
 #define FBSDK_GATEKEEPER_APP_GATEKEEPER_EDGE @"mobile_sdk_gk"
 #define FBSDK_GATEKEEPER_APP_GATEKEEPER_FIELDS @"gatekeepers"
 
+FBSDKGateKeeperKey FBSDKGateKeeperAppEventsIfAutoLogSubs = @"app_events_if_auto_log_subs";
+FBSDKGateKeeperKey FBSDKGateKeeperAppEventsKillSwitch = @"app_events_killswitch";
+
 @implementation FBSDKGateKeeperManager
 
 static NSMutableDictionary<NSString *, id> *_gateKeepers;
@@ -99,10 +102,8 @@ static BOOL _requeryFinishedForAppStart;
 + (FBSDKGraphRequest *)requestToLoadGateKeepers:(NSString *)appID
 {
   NSString *sdkVersion = [FBSDKSettings sdkVersion];
-  NSString *advertiserID = [FBSDKAppEventsUtility advertiserID] ?: @"";
 
   NSDictionary<NSString *, NSString *> *parameters = @{ @"platform": @"ios" ,
-                                                        @"device_id": advertiserID,
                                                         @"sdk_version": sdkVersion,
                                                         @"fields": FBSDK_GATEKEEPER_APP_GATEKEEPER_FIELDS};
 

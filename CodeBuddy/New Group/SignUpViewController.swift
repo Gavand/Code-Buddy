@@ -54,16 +54,17 @@ class SignUpViewController: UIViewController {
         signupButton.clipsToBounds = true
         
         //        let loginButton = LoginButton(readPermissions: [ .publicProfile ])
-        let loginButton = LoginButton(readPermissions: [ .publicProfile, .email, .userFriends ])
-//        loginButton.center = view.center
-        loginButton.frame = CGRect(x: 16, y: 625, width: view.frame.width - 32, height: 44)
-        loginButton.layer.cornerRadius = 10
-        loginButton.clipsToBounds = true
+//        let loginButton = LoginButton(readPermissions: [ .publicProfile, .email, .userFriends ])
+//
+////        loginButton.center = view.center
+//        loginButton.frame = CGRect(x: 16, y: 625, width: view.frame.width - 32, height: 44)
+//        loginButton.layer.cornerRadius = 10
+//        loginButton.clipsToBounds = true
         
         if AccessToken.current != nil {
         }
         
-        view.addSubview(loginButton)
+//        view.addSubview(loginButton)
         
         meImage.layer.cornerRadius = 60.5
         meImage.clipsToBounds = true
