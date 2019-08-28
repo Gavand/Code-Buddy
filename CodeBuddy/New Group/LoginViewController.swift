@@ -23,14 +23,14 @@ class LoginViewController: UIViewController { //, UITextFieldDelegate
         
         
         emailTextField.backgroundColor = UIColor.clear
-        emailTextField.attributedPlaceholder = NSAttributedString(string: emailTextField.placeholder!, attributes: [NSAttributedStringKey.foregroundColor: UIColor(red: (253/255), green: (178/255), blue: (43/255), alpha: 1)])
+        emailTextField.attributedPlaceholder = NSAttributedString(string: emailTextField.placeholder!, attributes: [NSAttributedString.Key.foregroundColor: UIColor(red: (253/255), green: (178/255), blue: (43/255), alpha: 1)])
         let bottomLayerEmail = CALayer()
         bottomLayerEmail.frame = CGRect(x: 0, y: 29, width: 1000, height: 0.6)
         bottomLayerEmail.backgroundColor = UIColor(red: (253/255), green: (178/255), blue: (43/255), alpha: 1).cgColor
         emailTextField.layer.addSublayer(bottomLayerEmail)
         
         passwordTextField.backgroundColor = UIColor.clear
-        passwordTextField.attributedPlaceholder = NSAttributedString(string: passwordTextField.placeholder!, attributes: [NSAttributedStringKey.foregroundColor: UIColor(red: (253/255), green: (178/255), blue: (43/255), alpha: 1)])
+        passwordTextField.attributedPlaceholder = NSAttributedString(string: passwordTextField.placeholder!, attributes: [NSAttributedString.Key.foregroundColor: UIColor(red: (253/255), green: (178/255), blue: (43/255), alpha: 1)])
         let bottomLayerPassword = CALayer()
         bottomLayerPassword.frame = CGRect(x: 0, y: 29, width: 1000, height: 0.6)
         bottomLayerPassword.backgroundColor = UIColor(red: (253/255), green: (178/255), blue: (43/255), alpha: 1).cgColor
@@ -64,17 +64,17 @@ class LoginViewController: UIViewController { //, UITextFieldDelegate
     //        return true
     //    }
     func handleTextField() {
-        emailTextField.addTarget(self, action: #selector(self.textFieldDidChange), for: UIControlEvents.editingChanged)
-        passwordTextField.addTarget(self, action: #selector(self.textFieldDidChange), for: UIControlEvents.editingChanged)
+        emailTextField.addTarget(self, action: #selector(self.textFieldDidChange), for: UIControl.Event.editingChanged)
+        passwordTextField.addTarget(self, action: #selector(self.textFieldDidChange), for: UIControl.Event.editingChanged)
     }
     @objc func textFieldDidChange() {
         guard let email = emailTextField.text, !email.isEmpty,
             let password = passwordTextField.text, !password.isEmpty else {
-                loginButton.setTitleColor(UIColor.lightText, for: UIControlState.normal)
+                loginButton.setTitleColor(UIColor.lightText, for: UIControl.State.normal)
                 
                 return
         }
-        loginButton.setTitleColor(UIColor.white, for: UIControlState.normal)
+        loginButton.setTitleColor(UIColor.white, for: UIControl.State.normal)
         loginButton.isEnabled = true
     }
     @IBAction func loginButton_TouchUpInside(_ sender: Any) {

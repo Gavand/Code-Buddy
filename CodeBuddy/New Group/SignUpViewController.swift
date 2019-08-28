@@ -30,21 +30,21 @@ class SignUpViewController: UIViewController {
         self.hideKeyboardWhenTappedAround()
         
         usernameTextField.backgroundColor = UIColor.clear
-        usernameTextField.attributedPlaceholder = NSAttributedString(string: usernameTextField.placeholder!, attributes: [NSAttributedStringKey.foregroundColor: UIColor(red: (253/255), green: (178/255), blue: (43/255), alpha: 1)])
+        usernameTextField.attributedPlaceholder = NSAttributedString(string: usernameTextField.placeholder!, attributes: [NSAttributedString.Key.foregroundColor: UIColor(red: (253/255), green: (178/255), blue: (43/255), alpha: 1)])
         let bottomLayerUsername = CALayer()
         bottomLayerUsername.frame = CGRect(x: 0, y: 29, width: 1000, height: 0.6)
         bottomLayerUsername.backgroundColor = UIColor(red: (253/255), green: (178/255), blue: (43/255), alpha: 1).cgColor
         usernameTextField.layer.addSublayer(bottomLayerUsername)
         
         emailTextField.backgroundColor = UIColor.clear
-        emailTextField.attributedPlaceholder = NSAttributedString(string: emailTextField.placeholder!, attributes: [NSAttributedStringKey.foregroundColor: UIColor(red: (253/255), green: (178/255), blue: (43/255), alpha: 1)])
+        emailTextField.attributedPlaceholder = NSAttributedString(string: emailTextField.placeholder!, attributes: [NSAttributedString.Key.foregroundColor: UIColor(red: (253/255), green: (178/255), blue: (43/255), alpha: 1)])
         let bottomLayerEmail = CALayer()
         bottomLayerEmail.frame = CGRect(x: 0, y: 29, width: 1000, height: 0.6)
         bottomLayerEmail.backgroundColor = UIColor(red: (253/255), green: (178/255), blue: (43/255), alpha: 1).cgColor
         emailTextField.layer.addSublayer(bottomLayerEmail)
         
         passwordTextField.backgroundColor = UIColor.clear
-        passwordTextField.attributedPlaceholder = NSAttributedString(string: passwordTextField.placeholder!, attributes: [NSAttributedStringKey.foregroundColor: UIColor(red: (253/255), green: (178/255), blue: (43/255), alpha: 1)])
+        passwordTextField.attributedPlaceholder = NSAttributedString(string: passwordTextField.placeholder!, attributes: [NSAttributedString.Key.foregroundColor: UIColor(red: (253/255), green: (178/255), blue: (43/255), alpha: 1)])
         let bottomLayerPassword = CALayer()
         bottomLayerPassword.frame = CGRect(x: 0, y: 29, width: 1000, height: 0.6)
         bottomLayerPassword.backgroundColor = UIColor(red: (253/255), green: (178/255), blue: (43/255), alpha: 1).cgColor
@@ -82,19 +82,19 @@ class SignUpViewController: UIViewController {
     }
     
     func handleTextField() {
-        usernameTextField.addTarget(self, action: #selector(self.textFieldDidChange), for: UIControlEvents.editingChanged)
-        emailTextField.addTarget(self, action: #selector(self.textFieldDidChange), for: UIControlEvents.editingChanged)
-        passwordTextField.addTarget(self, action: #selector(self.textFieldDidChange), for: UIControlEvents.editingChanged)
+        usernameTextField.addTarget(self, action: #selector(self.textFieldDidChange), for: UIControl.Event.editingChanged)
+        emailTextField.addTarget(self, action: #selector(self.textFieldDidChange), for: UIControl.Event.editingChanged)
+        passwordTextField.addTarget(self, action: #selector(self.textFieldDidChange), for: UIControl.Event.editingChanged)
     }
     
     @objc func textFieldDidChange() {
         guard let username = usernameTextField.text, !username.isEmpty, let email = emailTextField.text, !email.isEmpty,
             let password = passwordTextField.text, !password.isEmpty else {
-                signupButton.setTitleColor(UIColor.lightText, for: UIControlState.normal)
+                signupButton.setTitleColor(UIColor.lightText, for: UIControl.State.normal)
                 
                 return
         }
-        signupButton.setTitleColor(UIColor.white, for: UIControlState.normal)
+        signupButton.setTitleColor(UIColor.white, for: UIControl.State.normal)
         signupButton.isEnabled = true
     }
     
@@ -114,7 +114,7 @@ class SignUpViewController: UIViewController {
         hud.textLabel.text = "Loading"
         hud.show(in: self.view)
         hud.dismiss(afterDelay: 3.0)
-        if let profileImage = self.pickedImage, let dataImage = UIImageJPEGRepresentation(profileImage, 0.1) {
+        if let profileImage = self.pickedImage, let dataImage = profileImage.jpegData(compressionQuality: 0.1) {
             AuthService.signUp(username: usernameTextField.text!, email: emailTextField.text!, password: passwordTextField.text!, dataImage: dataImage , onSuccess: {
                 hud.textLabel.text = "Success"
                 hud.indicatorView = JGProgressHUDSuccessIndicatorView()

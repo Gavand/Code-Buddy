@@ -25,7 +25,9 @@
 #import "FBSDKConstants.h"
 #import "FBSDKDynamicFrameworkLoader.h"
 #import "FBSDKError.h"
+#import "FBSDKFeatureManager.h"
 #import "FBSDKGateKeeperManager.h"
+#import "FBSDKInstrumentManager.h"
 #import "FBSDKInternalUtility.h"
 #import "FBSDKLogger.h"
 #import "FBSDKServerConfiguration.h"
@@ -102,6 +104,12 @@ static UIApplicationState _applicationState;
   [[FBSDKAppEvents singleton] registerNotifications];
 
   [delegate application:[UIApplication sharedApplication] didFinishLaunchingWithOptions:launchOptions];
+
+  [FBSDKFeatureManager checkFeature:FBSDKFeatureInstrument completionBlock:^(BOOL enabled) {
+    if (enabled) {
+      [FBSDKInstrumentManager enable];
+    }
+  }];
 
 #if !TARGET_OS_TV
   // Register Listener for App Link measurement events
@@ -204,8 +212,6 @@ static UIApplicationState _applicationState;
     [FBSDKAccessToken setCurrentAccessToken:cachedToken];
     // fetch app settings
     [FBSDKServerConfigurationManager loadServerConfigurationWithCompletionBlock:NULL];
-    // fetch gate keepers
-    [FBSDKGateKeeperManager loadGateKeepers];
 
     if (FBSDKSettings.isAutoLogAppEventsEnabled) {
         [self _logSDKInitialize];
@@ -342,6 +348,13 @@ static UIApplicationState _applicationState;
       bitmask |=  1 << bit;
     }
     bit++;
+  }
+
+  // Tracking if the consuming Application is using Swift
+  id delegate = [UIApplication sharedApplication].delegate;
+  NSString const *className = NSStringFromClass([delegate class]);
+  if ([className componentsSeparatedByString:@"."].count > 1) {
+    params[@"is_using_swift"] = @YES;
   }
 
   NSInteger existingBitmask = [[NSUserDefaults standardUserDefaults] integerForKey:FBSDKKitsBitmaskKey];
